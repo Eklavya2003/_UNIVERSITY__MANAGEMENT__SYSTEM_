@@ -165,7 +165,51 @@ public class Project extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String msg = ae.getActionCommand();
         
-      
+        if (msg.equals("Exit")) {
+            setVisible(false);
+        } else if (msg.equals("Calculator")) {
+            try {
+                Runtime.getRuntime().exec("calc.exe");
+            } catch (Exception e) {
+                
+            }
+        } else if (msg.equals("Notepad")) {
+            try {
+                Runtime.getRuntime().exec("notepad.exe");
+            } catch (Exception e) {
+                
+            }
+        } else if (msg.equals("New Faculty Information")) {
+            new AddTeacher();
+        } else if (msg.equals("New Student Information")) {
+            new AddStudent();
+        } else if (msg.equals("View Faculty Details")) {
+            new TeacherDetails();
+        } else if (msg.equals("View Student Details")) {
+            new StudentDetails();
+        } else if (msg.equals("Faculty Leave")) {
+            new TeacherLeave();
+        } else if (msg.equals("Student Leave")) {
+            new StudentLeave();
+        } else if (msg.equals("Faculty Leave Details")) {
+            new TeacherLeaveDetails();
+        } else if (msg.equals("Student Leave Details")) {
+            new StudentLeaveDetails();
+        } else if (msg.equals("Update Faculty Details")) {
+            new UpdateTeacher();
+        } else if (msg.equals("Update Student Details")) {
+            new UpdateStudent();
+        } else if (msg.equals("Enter Marks")) {
+            new EnterMarks();
+        } else if (msg.equals("Examination Results")) {
+            new ExaminationDetails();
+        } else if (msg.equals("Fee Structure")) {
+            new FeeStructure();
+        } else if (msg.equals("About")) {
+            new About();
+        } else if (msg.equals("Student Fee Form")) {
+            new StudentFeeForm();
+        }
     }
 
     public static void main(String[] args) {
