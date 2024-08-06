@@ -6,25 +6,25 @@ import java.util.*;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.*;
 
-public class AddStudent extends JFrame implements ActionListener{
+public class AddTeacher extends JFrame implements ActionListener{
     
     JTextField tfname, tffname, tfaddress, tfphone, tfemail, tfx, tfxii, tfaadhar;
-    JLabel labelrollno;
+    JLabel labelempId;
     JDateChooser dcdob;
-    JComboBox<String> cbcourse, cbbranch;
+    JComboBox cbcourse, cbbranch;
     JButton submit, cancel;
     
     Random ran = new Random();
     long first4 = Math.abs((ran.nextLong() % 9000L) + 1000L);
     
-    AddStudent() {
+    AddTeacher() {
         
         setSize(900, 700);
         setLocation(350, 50);
         
         setLayout(null);
         
-        JLabel heading = new JLabel("New Student Details");
+        JLabel heading = new JLabel("New Teacher Details");
         heading.setBounds(310, 30, 500, 50);
         heading.setFont(new Font("serif", Font.BOLD, 30));
         add(heading);
@@ -47,22 +47,21 @@ public class AddStudent extends JFrame implements ActionListener{
         tffname.setBounds(600, 150, 150, 30);
         add(tffname);
         
-        JLabel lblrollno = new JLabel("Roll Number");
-        lblrollno.setBounds(50, 200, 200, 30);
-        lblrollno.setFont(new Font("serif", Font.BOLD, 20));
-        add(lblrollno);
+        JLabel lblempId = new JLabel("Employee Id");
+        lblempId.setBounds(50, 200, 200, 30);
+        lblempId.setFont(new Font("serif", Font.BOLD, 20));
+        add(lblempId);
         
-        labelrollno = new JLabel("1533"+first4);
-        labelrollno.setBounds(200, 200, 200, 30);
-        labelrollno.setFont(new Font("serif", Font.BOLD, 20));
-        add(labelrollno);
+        labelempId = new JLabel("101"+first4);
+        labelempId.setBounds(200, 200, 200, 30);
+        labelempId.setFont(new Font("serif", Font.BOLD, 20));
+        add(labelempId);
         
         JLabel lbldob = new JLabel("Date of Birth");
         lbldob.setBounds(400, 200, 200, 30);
         lbldob.setFont(new Font("serif", Font.BOLD, 20));
         add(lbldob);
         
-        // Initialize the JDateChooser
         dcdob = new JDateChooser();
         dcdob.setBounds(600, 200, 150, 30);
         add(dcdob);
@@ -121,24 +120,24 @@ public class AddStudent extends JFrame implements ActionListener{
         tfaadhar.setBounds(600, 350, 150, 30);
         add(tfaadhar);
         
-        JLabel lblcourse = new JLabel("Course");
+        JLabel lblcourse = new JLabel("Qualification");
         lblcourse.setBounds(50, 400, 200, 30);
         lblcourse.setFont(new Font("serif", Font.BOLD, 20));
         add(lblcourse);
         
-        String[] course = {"B.Tech", "BBA", "BCA", "Bsc", "Msc", "MBA", "MCA", "MCom", "MA", "BA"};
-        cbcourse = new JComboBox<>(course);
+        String course[] = {"B.Tech", "BBA", "BCA", "Bsc", "Msc", "MBA", "MCA", "MCom", "MA", "BA"};
+        cbcourse = new JComboBox(course);
         cbcourse.setBounds(200, 400, 150, 30);
         cbcourse.setBackground(Color.WHITE);
         add(cbcourse);
         
-        JLabel lblbranch = new JLabel("Branch");
+        JLabel lblbranch = new JLabel("Department");
         lblbranch.setBounds(400, 400, 200, 30);
         lblbranch.setFont(new Font("serif", Font.BOLD, 20));
         add(lblbranch);
         
-        String[] branch = {"Computer Science", "Electronics", "Mechanical", "Civil", "IT"};
-        cbbranch = new JComboBox<>(branch);
+        String branch[] = {"Computer Science", "Electronics", "Mechanical", "Civil", "IT"};
+        cbbranch = new JComboBox(branch);
         cbbranch.setBounds(600, 400, 150, 30);
         cbbranch.setBackground(Color.WHITE);
         add(cbbranch);
@@ -163,38 +162,38 @@ public class AddStudent extends JFrame implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == submit) {
-            String name = tfname.getText();
-            String fname = tffname.getText();
-            String rollno = labelrollno.getText();
-            String dob = ((JTextField) dcdob.getDateEditor().getUiComponent()).getText();
-            String address = tfaddress.getText();
-            String phone = tfphone.getText();
-            String email = tfemail.getText();
-            String x = tfx.getText();
-            String xii = tfxii.getText();
-            String aadhar = tfaadhar.getText();
-            String course = (String) cbcourse.getSelectedItem();
-            String branch = (String) cbbranch.getSelectedItem();
-            
-            try {
-                String query = "INSERT INTO students (name, fname, rollno, dob, address, phone, email, class_x, class_xii, aadhar_number, course, branch) VALUES ('" + name + "', '" + fname + "', '" + rollno + "', '" + dob + "', '" + address + "', '" + phone + "', '" + email + "', '" + x + "', '" + xii + "', '" + aadhar + "', '" + course + "', '" + branch + "')";
+    if (ae.getSource() == submit) {
+        String name = tfname.getText();
+        String fname = tffname.getText();
+        String empID = labelempId.getText(); // Renamed from rollno to empID
+        String dob = ((JTextField) dcdob.getDateEditor().getUiComponent()).getText();
+        String address = tfaddress.getText();
+        String phone = tfphone.getText();
+        String email = tfemail.getText();
+        String x = tfx.getText();
+        String xii = tfxii.getText();
+        String aadhar = tfaadhar.getText();
+        String course = (String) cbcourse.getSelectedItem();
+        String branch = (String) cbbranch.getSelectedItem();
+        
+        try {
+            String query = "insert into teacher values('" + name + "', '" + fname + "', '" + empID + "', '" + dob + "', '" + address + "', '" + phone + "', '" + email + "', '" + x + "', '" + xii + "', '" + aadhar + "', '" + course + "', '" + branch + "')";
 
-                Conn con = new Conn();
-                con.s.executeUpdate(query);
-                
-                JOptionPane.showMessageDialog(null, "Student Details Inserted Successfully");
-                setVisible(false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else {
+            Conn con = new Conn();
+            con.s.executeUpdate(query);
+            
+            JOptionPane.showMessageDialog(null, "Teacher Details Inserted Successfully");
             setVisible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    } else {
+        setVisible(false);
     }
+}
+
     
     public static void main(String[] args) {
-        new AddStudent();
+        new AddTeacher();
     }
 }
